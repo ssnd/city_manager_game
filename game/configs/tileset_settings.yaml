@@ -1,0 +1,7 @@
+path: './game/static/galletcity_tiles.png'
+tile_width: 8
+tile_height: 8
+
+tiles:
+  grass: [7,11]
+  clay: [7,10]
