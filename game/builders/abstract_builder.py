@@ -3,11 +3,11 @@ from abc import ABC, abstractmethod
 
 class Builder(ABC):
 
-    @abstractmethod
+    # @abstractmethod
     def set_color(self, color):
         pass
 
-    @abstractmethod
+    # @abstractmethod
     def set_tile(self, image):
         pass
 

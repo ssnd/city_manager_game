@@ -1,5 +1,7 @@
 from game.config import config as CONFIG
 import pygame
+from game.mouse_states.mouse import Mouse
+from game.mouse_states.mouse_states import FreeMoving
 from game.game_renderer import GameRenderer
 
 
@@ -13,9 +15,11 @@ class GameManager:
         self.screen = screen
         self.scene = 1
         self.button_clicked = False
-        self.game = GameRenderer()
+        self.mouse = Mouse(FreeMoving())
+        self.game = None
 
     def update(self):
+        self.mouse.handleClick()
         if self.scene == 1:
             self.game.draw(self.screen)
 
@@ -26,6 +30,7 @@ class GameManager:
     def start(self):
         pygame.init()
         pygame.font.init()
+        self.game = GameRenderer(self.mouse)
 
         self.screen.fill([255, 255, 255])
 
