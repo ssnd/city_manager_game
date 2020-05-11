@@ -3,18 +3,36 @@ tile_width: 8
 tile_height: 8
 
 tiles:
-  grass: [[7,11]]
+  grass:
+    main: [[7,11]]
 #  clay: [[7,10]]
-  cobblestone: [[3,16]]
-  sidewalk_up: [[4,0]]
-  road_up: [[2,0]]
-  crosswalk: [[1,1]]
+  cobblestone:
+    main: [[3,16]]
+  sidewalk:
+    main: [[4,0]]
+    up: [[4,0]]
+    down: [[4,4]]
+    left: [[3,3]]
+    right: [[7,1]]
+    corner_tl: [[3,0]]
+    corner_tr: [[7,0]]
+    corner_bl: [[3,4]]
+    corner_br: [[6,3]]
 
-  sidewalk_down: [[4,4]]
-  railway: [[6,15],[6,16]]
-  tree: [[4,1], [4,2]]
-  tower: [[3,13],[3,14]]
-  red_house: [[1,6],[1,7]]
-  blue_house: [[0,6],[0,7]]
-  helicopter_pad: [[1,13],[1,14], [2,13], [2,14]]
+  road_up:
+    main: [[2,0]]
+  crosswalk:
+    main: [[1,1]]
+  railway:
+    main: [[6,15],[6,16]]
+  tree:
+    main: [[4,1], [4,2]]
+  tower:
+    main: [[3,13],[3,14]]
+  red_house:
+    main: [[1,6],[1,7]]
+  blue_house:
+    main: [[0,6],[0,7]]
+  helicopter_pad:
+    main: [[1,13],[1,14], [2,13], [2,14]]
 

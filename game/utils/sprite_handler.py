@@ -18,16 +18,15 @@ class SpriteHandler:
         image = pygame.image.load(image_path).convert()
         return image
 
-    def get_tile_coords(self, name):
-        return self.config['tiles'][name]
+    def get_tile_coords(self, name, type):
+        return self.config['tiles'][name][type]
 
-    def get_tile_by_name(self, name):
-        coords_list = self.get_tile_coords(name)
+    def get_tile_by_name(self, name, type):
+        coords_list = self.get_tile_coords(name, type)
 
         tile_coords = [self.get_tile_subsurface(*coords)
                        for coords in coords_list]
 
-        # tile_coords.reverse()
         return tile_coords
 
     def get_tile_subsurface(self, x, y):

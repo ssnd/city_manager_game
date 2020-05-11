@@ -15,5 +15,6 @@ if __name__ == "__main__":
 
     logger.addHandler(ch)
     logger.info('Starting the application...')
-    game_manager = GameManager()
-    game_manager.start()
+
+    gm = GameManager()
+    gm.start()

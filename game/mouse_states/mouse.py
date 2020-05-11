@@ -7,7 +7,7 @@ logger = logging.getLogger('game')
 
 class Mouse(ABC):
     _state = None
-    _selectedBlock = None
+    _selectedBlock = {}
 
     def __init__(self, state) -> None:
         self.transition_to(state)
@@ -30,8 +30,9 @@ class Mouse(ABC):
         self._state.context = self
 
     def select_block(self, tile):
-        self._selectedBlock = tile
-        self._state.select_block(tile)
+        self._selectedBlock['name'] = tile
+        self._selectedBlock['type'] = "main"
+        self._state.select_block(self.selectedBlock)
 
     def block_built(self):
         self._state.block_built()

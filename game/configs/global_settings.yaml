@@ -1,3 +1,4 @@
+game_save_file: './saved_game.pickle'
 tilemap_config: './game/configs/tileset_settings.yaml'
 screen:
   width: 800

@@ -3,7 +3,7 @@ from pygame.locals import *
 
 from game.builders.block_builder import BlockBuilder
 from game.builders.block_director import BlockDirector
-from game.config import config as CONFIG
+from game import config as CONFIG
 from game.utils.config_handler import ConfigHandler
 from game.utils.sprite_handler import SpriteHandler
 import logging
@@ -22,7 +22,7 @@ class TileButton:
         self.sprite_handler = SpriteHandler(CONFIG['tilemap_config'])
         builder = BlockBuilder(self.button, self.mouse, 40, 40)
         self.tile_director = BlockDirector(builder)
-        self.button.fill((255,255,255))
+        self.button.fill((255, 255, 255))
 
     def handle_click(self):
         if self.mouse.click_info and self.rect.collidepoint(self.mouse.click_info):
