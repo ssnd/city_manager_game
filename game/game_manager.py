@@ -39,6 +39,8 @@ class GameManager:
 
         self.screen.fill([255, 255, 255])
 
+
+
         running = True
         while running:
             for event in pygame.event.get():
@@ -46,6 +48,7 @@ class GameManager:
                    (event.type == pygame.KEYUP and event.key == pygame.K_ESCAPE):
                     self.game_save.save_game()
                     running = False
+
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:

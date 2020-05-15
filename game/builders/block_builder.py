@@ -13,8 +13,9 @@ logger = logging.getLogger('game')
 
 class BlockBuilder(Builder):
 
-    def __init__(self, surface, mouse, tile_width, tile_height):
+    def __init__(self, surface, mouse, tile_width, tile_height, wallet=None):
         self.surface = surface
+        self.wallet = wallet
         self.mouse = mouse
         self.tile_width = int(tile_width)
         self.tile_height = int(tile_height)
@@ -28,6 +29,10 @@ class BlockBuilder(Builder):
         self.tile_coords = None
         self.x, self.y = None, None
         self.tile_name = None
+        self.time = 0
+
+    def set_time(self, time):
+        self.time = time
 
     def set_coords(self, coords: tuple):
         self.x, self.y = coords

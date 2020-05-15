@@ -12,10 +12,11 @@ logger = logging.getLogger('game')
 
 
 class TileButton:
-    def __init__(self, surface, mouse):
+    def __init__(self, surface, mouse, wallet):
         self.surface = surface
         self.button = pygame.Surface((100, 600))
         self.mouse = mouse
+        self.wallet = wallet
         self.rect = None
         self.tile_name = None
         self.last_press = 0
@@ -27,26 +28,27 @@ class TileButton:
     def handle_click(self):
         if self.mouse.click_info and self.rect.collidepoint(self.mouse.click_info):
             logger.debug("Selected tile: {}".format(self.tile_name))
+            logger.debug(f"income: {self.wallet.get_income(self.tile_name)}")
             self.mouse.select_block(self.tile_name)
             self.mouse.click_info = None
 
     def draw_tile(self, name, coords):
         self.rect = self.tile_director.create_cpanel_tile(name, (coords[0]+10, coords[1]+5))
         self.tile_name = name
-
         self.handle_click()
         self.surface.blit(self.button, (0, 0))
 
 class ControlPanel:
-    def __init__(self, surface, mouse):
+    def __init__(self, surface, mouse, wallet):
         self.surface = surface
         # TODO: get the data from the config file
         self.subsurface = pygame.Surface((100, 621))
         self.mouse = mouse
+        self.wallet = wallet
         self.last_press = 0
 
     def setup_subsurface(self):
-        self.subsurface.fill((0, 0, 0))
+        self.subsurface.fill((255, 255, 255))
 
     def draw(self):
         self.setup_subsurface()
@@ -59,12 +61,22 @@ class ControlPanel:
         config = ConfigHandler.open_config(CONFIG['tilemap_config'])
         tiles = config['tiles']
 
-        button = TileButton(self.subsurface, self.mouse)
+        font = pygame.font.SysFont('arial', 25)
+
+        text = font.render(("Money: "+str(self.wallet.money)), True, (0,0,0), (255, 255, 255))
+
+        textRect = text.get_rect()
+
+        button = TileButton(self.subsurface, self.mouse, self.wallet)
 
         for i, tile in enumerate(tiles):
             coords = (50*(i%2), 50*int(i/2))
             button.draw_tile(tile, coords)
 
-        self.surface.blit(self.subsurface, (0, 10))
+        self.surface.blit(self.subsurface, (0, 20))
+        self.surface.blit(text, textRect)
+
+
+        # self.surface.blit()
 
 

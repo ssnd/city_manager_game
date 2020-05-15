@@ -18,7 +18,8 @@ class Mouse(ABC):
         pygame.event.get()
         pos = pygame.mouse.get_pos()
         pressed1, pressed2, pressed3 = pygame.mouse.get_pressed()
-
+        
+        # logger.debug(f"{pressed1, pressed2, pressed3}")
         if pressed1 == 0 and self.last_press == 1:
             self.click_info = pos
 

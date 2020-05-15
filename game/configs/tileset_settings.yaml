@@ -8,6 +8,7 @@ tiles:
 #  clay: [[7,10]]
   cobblestone:
     main: [[3,16]]
+    money: 0
   sidewalk:
     main: [[4,0]]
     up: [[4,0]]
@@ -27,12 +28,18 @@ tiles:
     main: [[6,15],[6,16]]
   tree:
     main: [[4,1], [4,2]]
+    income: 10
+    price: 5
   tower:
     main: [[3,13],[3,14]]
+    income: 30
+    price: 150
   red_house:
     main: [[1,6],[1,7]]
   blue_house:
     main: [[0,6],[0,7]]
   helicopter_pad:
     main: [[1,13],[1,14], [2,13], [2,14]]
+    price: 500
+    income: 200
 
