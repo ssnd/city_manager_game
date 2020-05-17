@@ -1,6 +1,4 @@
 import itertools
-import random
-
 from game.builders.abstract_builder import Builder
 from game.objects.tile import Tile
 from game.utils.sprite_handler import SpriteHandler

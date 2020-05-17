@@ -11,16 +11,15 @@ WIDTH = CONFIG['screen']['width']
 HEIGHT = CONFIG['screen']['height']
 
 
-
 class GameRenderer:
     def __init__(self, mouse, game_save):
         self.mouse = mouse
         self.surface = pygame.Surface((WIDTH, HEIGHT))
         self.wallet = Wallet(game_save)
         self.setup_scheduled_events()
-        self.control_panel = ControlPanel(self.surface, self.mouse, self.wallet)
 
         self.grid = TileGrid(self.surface, self.mouse, self.wallet, game_save)
+        self.control_panel = ControlPanel(self.surface, self.mouse, self.wallet, self.grid)
         self.scheduled_events_handler = ScheduledEventsHandler(self.wallet, self.grid)
 
     def setup_scheduled_events(self):

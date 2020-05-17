@@ -8,6 +8,8 @@ from game.utils.config_handler import ConfigHandler
 from game.utils.sprite_handler import SpriteHandler
 import logging
 
+from game.utils.text_box import TextBox
+
 logger = logging.getLogger('game')
 
 
@@ -38,12 +40,43 @@ class TileButton:
         self.handle_click()
         self.surface.blit(self.button, (0, 0))
 
+
+class ResetButton(object):
+    def __init__(self, subsurf, mouse, grid):
+        self.subsurface = subsurf
+        self.mouse = mouse
+        self.grid = grid
+        self.color = (255, 0,0)
+        self.surface = pygame.Surface((70, 300))
+        self.surface.fill((255, 255, 255))
+        self.text = TextBox(self.surface, align="center")
+        self.text.text_color = (255, 255, 255)
+        self.rect = None
+        self.text.background_color = self.color
+
+    def handle_click(self):
+        if self.mouse.click_info and self.rect.collidepoint(self.mouse.click_info):
+            logger.info("Resetting the grid")
+            self.grid.reset_grid()
+
+        self.mouse.click_info = None
+
+    def draw(self):
+
+        pygame.draw.rect(self.surface, self.color, (0, 0, 150, 30))
+        self.text.set_margin_top(5)
+        self.text.draw("RESET")
+        self.rect = self.subsurface.blit(self.surface, (10, 565))
+        self.handle_click()
+
 class ControlPanel:
-    def __init__(self, surface, mouse, wallet):
+    def __init__(self, surface, mouse, wallet, grid):
         self.surface = surface
+        self.grid = grid
         # TODO: get the data from the config file
         self.subsurface = pygame.Surface((100, 621))
         self.mouse = mouse
+        self.reset_button = ResetButton(self.subsurface, self.mouse, self.grid)
         self.wallet = wallet
         self.last_press = 0
 
@@ -61,21 +94,28 @@ class ControlPanel:
         config = ConfigHandler.open_config(CONFIG['tilemap_config'])
         tiles = config['tiles']
 
-        font = pygame.font.SysFont('arial', 25)
-
-        text = font.render(("Money: "+str(self.wallet.money)), True, (0,0,0), (255, 255, 255))
-
-        textRect = text.get_rect()
-
         button = TileButton(self.subsurface, self.mouse, self.wallet)
 
         for i, tile in enumerate(tiles):
-            coords = (50*(i%2), 50*int(i/2))
+            coords = (0, 50*i)
             button.draw_tile(tile, coords)
 
-        self.surface.blit(self.subsurface, (0, 20))
-        self.surface.blit(text, textRect)
+        t = TextBox(self.subsurface, font_size=12)
 
+        for i,tile in enumerate(tiles):
+            t.position = (51, 15+i*50)
+            t.draw("income: {}".format(self.wallet.get_income(tile)))
+            t.position = (51, 30+i*50)
+            t.draw("price: {}".format(self.wallet.get_income(tile)))
+
+        self.reset_button.draw()
+
+        t1 = TextBox(self.subsurface, font_size=20)
+        t1.position = (10, 600)
+        t1.draw("Money: {}".format(self.wallet.money))
+
+
+        self.surface.blit(self.subsurface, (0, 30))
 
         # self.surface.blit()
 

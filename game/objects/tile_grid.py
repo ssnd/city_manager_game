@@ -3,13 +3,10 @@ import pygame
 from collections import deque
 from game.builders.block_builder import BlockBuilder
 from game.builders.block_director import BlockDirector
-# from deepcopy import copy
 import logging
-
 from game.checkers.CheckTiles import CheckTiles
 
 logger = logging.getLogger('game')
-
 
 WIDTH = CONFIG['screen']['width']
 HEIGHT = CONFIG['screen']['height']
@@ -38,7 +35,7 @@ class TileGrid:
     def build_block(self, new_block):
 
         if new_block == {}:
-            logger.info("You haven't selected a block")
+            logger.info("You haven't selected any block")
             return
 
         x = int((self.mouse.click_info[0] - self.rect.x)/TILE_WIDTH)
@@ -55,6 +52,17 @@ class TileGrid:
         self.game_save['created_blocks'] = self.blocks
         self.wallet.spend(self.wallet.get_price(new_block['name']))
         logger.debug("Building new tile: {}".format(new_block))
+
+    def reset_grid(self):
+        # logger.debug(f"here")
+        for x in range(TILE_COUNT_X):
+            for y in range(TILE_COUNT_Y):
+                    self.blocks[(x, y)] = {
+                        "name" : "cobblestone",
+                        "type" : "main",
+                        "ticks_created" : 0
+                    }
+
 
     def draw(self):
         subsurface = pygame.Surface((CONFIG['tilemap']['width'],
@@ -92,6 +100,7 @@ class TileGrid:
                     self.blocks[(x,y)] = new_block
                     name, type, time = new_block.values()
                     tile_director.create_tile(name, type, coords, time)
+
 
         self.rect = self.surface.blit(subsurface, (110, 10))
 

@@ -1,5 +1,4 @@
 import logging
-import pygame
 
 from game.objects.tile import Tile
 
