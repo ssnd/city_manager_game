@@ -42,7 +42,6 @@ class BlockBuilder(Builder):
         self.tile_width, self.tile_height = size
 
     def set_tile_subsurf(self):
-        # logger.debug(f"{self.tile['name']}")
         tile_surf = self.sprite_handler.get_tile_by_name(self.tile['name'], self.tile['type'])
         self.tile_subsurfaces = tile_surf
 

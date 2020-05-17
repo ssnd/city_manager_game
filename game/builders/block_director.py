@@ -8,7 +8,7 @@ class BlockDirector:
     def __init__(self, builder):
         self._builder = builder
 
-    def create_tile(self, name: str, type: str, coords: tuple, time):
+    def create_tile(self, name: str, type: str, coords: tuple):
         self._builder.set_tile_name(name)
         self._builder.set_tile_type(type)
         self._builder.set_tile_subsurf()
@@ -17,7 +17,6 @@ class BlockDirector:
         return  {
             "name" : name,
             "type" : type,
-            "ticks_created" : 0,
         }
 
     def create_cpanel_tile(self, name, coords) -> Tile:

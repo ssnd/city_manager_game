@@ -41,26 +41,22 @@ class TileGrid:
         x = int((self.mouse.click_info[0] - self.rect.x)/TILE_WIDTH)
         y = int((self.mouse.click_info[1] - self.rect.y)/TILE_HEIGHT)
 
-        new_block['ticks_created'] = pygame.time.get_ticks()
         if (self.wallet.money - self.wallet.get_price(new_block['name'])) < 0:
             logger.info("You don't have enough money to buy that.")
             return
 
         self.blocks[(x, y)] = new_block
 
-
         self.game_save['created_blocks'] = self.blocks
         self.wallet.spend(self.wallet.get_price(new_block['name']))
-        logger.debug("Building new tile: {}".format(new_block))
+        logger.info(f"Building new tile: {new_block['name']} of type {new_block['type']}")
 
     def reset_grid(self):
-        # logger.debug(f"here")
         for x in range(TILE_COUNT_X):
             for y in range(TILE_COUNT_Y):
                     self.blocks[(x, y)] = {
                         "name" : "cobblestone",
                         "type" : "main",
-                        "ticks_created" : 0
                     }
 
 
@@ -88,18 +84,17 @@ class TileGrid:
                 if (x, y) in self.blocks.keys():
                     # tile_checker.check(x,y)
                     new_block = self.blocks[(x, y)]
-                    name, type, time = new_block['name'], new_block['type'], new_block['ticks_created']
-                    self.blocks[(x,y)] = tile_director.create_tile(name, type, coords, time)
-                    # print(self.blocks[(x,y)]['ticks_created'])
+                    name, type = new_block['name'], new_block['type']
+                    self.blocks[(x,y)] = tile_director.create_tile(name, type, coords)
+
                 else:
                     new_block = {
                         "name": "cobblestone",
                         "type" : "main",
-                        "ticks_created" : pygame.time.get_ticks()
                     }
                     self.blocks[(x,y)] = new_block
-                    name, type, time = new_block.values()
-                    tile_director.create_tile(name, type, coords, time)
+                    name, type = new_block.values()
+                    tile_director.create_tile(name, type, coords)
 
 
         self.rect = self.surface.blit(subsurface, (110, 10))

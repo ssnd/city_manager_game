@@ -21,7 +21,7 @@ class WelcomeScreen(object):
         text_box.font_size = 25
         text_box.draw_new_line("Here you can create new buildings, roads", margin_top=20)
         text_box.draw_new_line("and earn money from the things you have built.")
-        text_box.draw_new_line("Every {} seconds you will earn money", margin_top=5)
+        text_box.draw_new_line(f"Every {CONFIG['income_period']/1000} seconds you will earn money", margin_top=5)
         text_box.draw_new_line("from your belongings.")
         text_box.draw_new_line("You can build new things using the ")
         text_box.draw_new_line("money you have as well.")

@@ -1,6 +1,7 @@
 game_save_file: './saved_game.pickle'
 income_period: 5000 # in ms
 tilemap_config: './game/configs/tileset_settings.yaml'
+initial_money_available: 100
 screen:
   width: 800
   height: 660

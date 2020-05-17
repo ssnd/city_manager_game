@@ -21,7 +21,7 @@ class GameSaver:
         return {}
 
     def save_game(self):
-        logger.info("Saving the game and exitting")
+        logger.info("Saving the game...")
         with open(self.saved_game_file, "wb") as f:
             pickle.dump(self.game_state, f)
 

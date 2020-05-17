@@ -1,6 +1,6 @@
 import logging
 
-from game.utils.Coord import Coord
+from game.utils.coord import Coord
 
 logger = logging.getLogger("game")
 
@@ -51,7 +51,6 @@ class CheckTiles:
                     b[(x+1,y+1)]['name'] != 'sidewalk' \
                     and \
                     b[(x, y)]['name'] == 'sidewalk':
-                # logger.debug(f"here")
                 b[(x, y)] = self.create_block('sidewalk', 'corner_tl')
                 b[(x, y + 1)] = self.create_block('sidewalk', 'left')
                 b[(x + 1, y)] = self.create_block('sidewalk', 'up')
