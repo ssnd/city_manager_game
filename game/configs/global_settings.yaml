@@ -1,0 +1,29 @@
+game_save_file: './saved_game.pickle'
+income_period: 5000 # in ms
+tilemap_config: './game/configs/tileset_settings.yaml'
+initial_money_available: 100
+screen:
+  width: 800
+  height: 660
+
+tilemap:
+  width: 640
+  height: 640
+
+tile:
+  tile_count_x: 16
+  tile_count_y: 16
+
+styles:
+  tilemap_margin: # the tilemap margins
+    left: 100
+    right: 0
+    top: 10
+    bottom: 10
+  game_area_margin: # the margins of the gaming area
+    top: 10
+    right: 10
+    bottom: 10
+    left: 10
+
+  font: 'Bubblegum Sans'
