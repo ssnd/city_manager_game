@@ -1,4 +1,4 @@
-цasciimatics==1.11.0
+asciimatics==1.11.0
 astroid==2.3.3
 autopep8==1.5.2
 configparser==5.0.0
