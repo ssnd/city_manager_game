@@ -18,7 +18,7 @@ pyflakes==2.1.1
 pygame==1.9.3
 pylint==2.4.4
 PyTMX==3.21.5
-PyYAML==5.3.1
+PyYAML==5.4
 six==1.14.0
 typed-ast==1.4.1
 typing-extensions==3.7.4.2
